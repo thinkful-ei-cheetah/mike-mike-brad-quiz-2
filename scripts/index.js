@@ -4,12 +4,12 @@
 
 // By putting these variables in global scope, you can experiment with them in
 // the debug console.
-let q, quizDisplay, quizStatus;     // eslint-disable-line no-unused-vars
+let q, quizDisplay, quizStatus, trivia;     // eslint-disable-line no-unused-vars
 
 //?amount=5&category=21&difficulty=easy&type=multiple
 
 function main() {
-  const trivia = new TriviaApi(5, 21, 'easy', 'multiple');
+  trivia = new TriviaApi(5, 21, 'easy', 'multiple');
   trivia.generate()
     .then(response => response.json())
     .then(data => {

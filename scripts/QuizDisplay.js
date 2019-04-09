@@ -6,7 +6,8 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
   getEvents() {
     return {
       'click .start': 'handleStart',
-      'submit #js-answer-form': 'submitAnswerForm'
+      'submit #js-answer-form': 'submitAnswerForm',
+      'click .play-again': 'handlePlayAgain'
     };
   }
 
@@ -27,7 +28,7 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
   _buildAnswers(answers) {
     let template = '';
     answers.forEach(answer => {
-      template += `<label><input type='radio' name='answer' value=${answer}>${answer}</label>`;
+      template += `<label><input type='radio' name='answer' value='${answer}'>${answer}</label>`;
     });
     return template;
   }
@@ -56,11 +57,25 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
     `;
   }
 
+  _highScoreHtml() {
+    return `
+      <p>Congrats!  Your score of ${this.model.score} is new high score!</p>
+    `;
+  }
+
+  _notHighScoreHtml() {
+    return `
+      <p>Your final score was ${this.model.score}</p>
+      <p>Keep trying!  The current high score is ${this.model.highScore()}</p>
+    `;
+  }
+  
   _generateCompletionScreen() {
     return `
       <div>
         <h2>Quiz Complete!</h2>
-        <p>Your final score was ${this.model.score}</p>
+          ${this.model.isHighScore() ? this._highScoreHtml() : this._notHighScoreHtml()}
+          <button class='play-again'>Play Again</button>
       </div>
     `;
   }
@@ -86,6 +101,12 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
     this.model.submitAnswer(userAnswer);
     this.model.update();
 
+  }
+
+  handlePlayAgain() {
+    this.model.playAgain()
+      .then(quiz => quiz.update());
+    
   }
 
 }

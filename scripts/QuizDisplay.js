@@ -22,12 +22,24 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
     `;
   }
 
+  _buildAnswers(answers) {
+    let template = '';
+    answers.forEach(answer => {
+      template += `<li>${answer}</li>`;
+    });
+    return template;
+  }
+  
   _generateQuestion() {
-    const question = this.model.nextQuestion()
+    const question = this.model.nextQuestion();
     return `
-      <div>
-        ${question.question}
+      <div class='question'>
+        ${question.text}
       </div>
+
+      <ul class='answers'>
+        ${this._buildAnswers(question.answers)}
+      </ul>
     `;
   }
 

@@ -2,10 +2,10 @@
 
 const Question = (function() {
   class Question {
-    constructor(question, incorrectAnswers, correctAnswer) {
-      this.text = question;
-      this.correctAnswer = correctAnswer;
-      this.answers = this.buildAnswers(incorrectAnswers, correctAnswer);
+    constructor(result) {
+      this.text = result.question;
+      this.correctAnswer = result.correct_answer;
+      this.answers = this.buildAnswers(result.incorrect_answers, result.correct_answer);
       this.userAnswer = null;
     }
   

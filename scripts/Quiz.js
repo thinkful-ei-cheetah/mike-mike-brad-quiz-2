@@ -1,19 +1,9 @@
 'use strict';
 
-/* global Model */
-
-/**
- * You can replace this Quiz with the version you worked on yesterday. It's just
- * provided as an example.
- */
+/* global Model, trivia, Question */
 
 class Quiz extends Model {          // eslint-disable-line no-unused-vars
   
-
-  // This class property could be used to determine the no. of quiz questions
-  // In later implementations, the user could provide a quiz length and override
-  static DEFAULT_QUIZ_LENGTH = 5;
-
   constructor(questions) {
     super();
 
@@ -51,12 +41,10 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
   }
 
   submitAnswer(answer) {
-    // console.log('submit answer getting called');
     const question = this.asked[this.asked.length - 1];
     question.userAnswer = answer;
 
     if (answer === question.correctAnswer) {
-      // console.log('score incrementer getting called', this.score);
       this.score++;
     }
 

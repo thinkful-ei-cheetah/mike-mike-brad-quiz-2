@@ -23,9 +23,10 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
   }
 
   _generateQuestion() {
+    const question = this.model.nextQuestion()
     return `
       <div>
-        ${this.model.questions[0].text}
+        ${question.question}
       </div>
     `;
   }

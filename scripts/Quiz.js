@@ -14,7 +14,7 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
   // In later implementations, the user could provide a quiz length and override
   static DEFAULT_QUIZ_LENGTH = 5;
 
-  constructor() {
+  constructor(questions) {
     super();
 
     this.unasked = questions;
@@ -37,7 +37,7 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
     
     const question = this.unasked.pop();
     this.asked.push(question);
-    console.log(question.text);
+    return question;
   }
 
   submitAnswer(answer) {

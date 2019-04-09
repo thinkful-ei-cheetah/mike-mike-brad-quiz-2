@@ -13,11 +13,13 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
     this.scoreHistory = [];
     this.active = false;
     this.totalQuestions = questions.length;
+    this.showResults = false;
 
   }
 
   playAgain() {
-    return trivia.generate()
+    const randomCategory = Math.floor(Math.random() * 32) + 9;
+    return trivia.generate(5, randomCategory, 'easy', 'multiple')
       .then(response => response.json())
       .then(data => {
         const questions = data.results.map(result => new Question(result));
@@ -41,6 +43,7 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
   }
 
   submitAnswer(answer) {
+    this.showResults = true;
     const question = this.asked[this.asked.length - 1];
     question.userAnswer = answer;
 
@@ -72,6 +75,10 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
 
   isHighScore() {
     return this.score >= this.highScore();
+  }
+
+  lastQuestion() {
+    return this.asked[this.asked.length-1];
   }
 
 }

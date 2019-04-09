@@ -29,6 +29,10 @@ const Question = (function() {
       }
       return array;
     }
+
+    isCorrect() {
+      return this.userAnswer === this.correctAnswer;
+    }
   }
 
   return Question;

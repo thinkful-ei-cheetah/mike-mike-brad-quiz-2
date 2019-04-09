@@ -7,7 +7,8 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
     return {
       'click .start': 'handleStart',
       'submit #js-answer-form': 'submitAnswerForm',
-      'click .play-again': 'handlePlayAgain'
+      'click .play-again': 'handlePlayAgain',
+      'click .continue': 'callNextQuestion'
     };
   }
 
@@ -80,8 +81,43 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
     `;
   }
 
+  _buildCorrectAnswerHtml(question) {
+    return `
+      <p>You got it!</p>
+      <p>The correct answer was: </p>
+      <h3 class='correct-answer'>${question.correctAnswer}</h3>
+    `;
+  }
+
+  _buildIncorrectAnswerHtml(question) {
+    return `
+      <p>Sorry, that's incorrect.</p>
+      <p>You answered: </p>
+      <h3 class='incorrect-answer'>${question.userAnswer}</h3>
+
+      <p>The correct answer was: </p>
+      <h3 class='correct-answer'>${question.correctAnswer}</h3>
+    `;
+  }
+
+  _generateQuestionResult() {
+    const question = this.model.lastQuestion();
+    return `
+      <div class='question'>
+        ${question.text}
+      </div>
+
+      <div class='result'>
+        ${question.isCorrect() ? this._buildCorrectAnswerHtml(question) : this._buildIncorrectAnswerHtml(question)}
+      </div>
+      <button class='continue'>Continue</button>
+    `;
+  }
+
   template() {
-    if (this.model.active && this.model.isCompleted()) {
+    if (this.model.active && this.model.showResults) {
+      return this._generateQuestionResult(); 
+    } else if (this.model.active && this.model.isCompleted()) {
       return this._generateCompletionScreen();
     } else if (this.model.active) {
       return this._generateQuestion();
@@ -107,6 +143,11 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
     this.model.playAgain()
       .then(quiz => quiz.update());
     
+  }
+
+  callNextQuestion() {
+    this.model.showResults = false;
+    this.model.update();
   }
 
 }

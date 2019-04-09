@@ -22,12 +22,26 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
     `;
   }
 
+
   _buildAnswers(answers) {
     let template = '';
     answers.forEach(answer => {
-      template += `<li>${answer}</li>`;
+      template += `<label><input type='radio' name='answer' value=${answer}>${answer}</label>`;
     });
     return template;
+  }
+  
+  _buildAnswerForm(answers) {
+    let form = `
+      <form id='js-answer-form'>
+        <fieldset>
+          ${this._buildAnswers(answers)}
+        </fieldset>
+      <button type='submit'>Submit</button>
+      </form>
+    `;
+    
+    return form;
   }
   
   _generateQuestion() {
@@ -37,9 +51,7 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
         ${question.text}
       </div>
 
-      <ul class='answers'>
-        ${this._buildAnswers(question.answers)}
-      </ul>
+      ${this._buildAnswerForm(question.answers)}
     `;
   }
 
@@ -55,4 +67,5 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
     this.model.startNewGame();
     this.model.update();
   }
+
 }

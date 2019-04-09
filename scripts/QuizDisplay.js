@@ -6,6 +6,7 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
   getEvents() {
     return {
       'click .start': 'handleStart',
+      'submit #js-answer-form': 'submitAnswerForm'
     };
   }
 
@@ -37,7 +38,7 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
         <fieldset>
           ${this._buildAnswers(answers)}
         </fieldset>
-      <button type='submit'>Submit</button>
+      <button class='submit-answer' type='submit'>Submit</button>
       </form>
     `;
     
@@ -55,8 +56,19 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
     `;
   }
 
+  _generateCompletionScreen() {
+    return `
+      <div>
+        <h2>Quiz Complete!</h2>
+        <p>Your final score was ${this.model.score}</p>
+      </div>
+    `;
+  }
+
   template() {
-    if (this.model.active) {
+    if (this.model.active && this.model.isCompleted()) {
+      return this._generateCompletionScreen();
+    } else if (this.model.active) {
       return this._generateQuestion();
     } else {
       return this._generateIntro();
@@ -66,6 +78,14 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
   handleStart() {
     this.model.startNewGame();
     this.model.update();
+  }
+
+  submitAnswerForm() {
+    event.preventDefault();
+    const userAnswer = $('input[name=answer]:checked', event.target).val();
+    this.model.submitAnswer(userAnswer);
+    this.model.update();
+
   }
 
 }

@@ -5,7 +5,7 @@
 class QuizStatus extends Renderer {    // eslint-disable-line no-unused-vars
   template() {
     return `
-      <div>Status Bar</div>
+      <div>${this.model.progress()} Questions</div>
     `;
   }
 }

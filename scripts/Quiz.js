@@ -17,11 +17,12 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
   constructor(questions) {
     super();
 
-    this.unasked = questions;
+    this.unasked = [...questions];
     this.asked = [];
     this.score = 0;
     this.scoreHistory = [];
     this.active = false;
+    this.totalQuestions = questions.length;
 
   }
 
@@ -41,7 +42,22 @@ class Quiz extends Model {          // eslint-disable-line no-unused-vars
   }
 
   submitAnswer(answer) {
-    return answer === this.asked[this.asked.length - 1].correctAnswer;
+    const question = this.asked[this.asked.length - 1];
+    question.userAnswer = answer;
+
+    if (answer === question.correctAnswer) {
+      this.score++
+    }
+  }
+
+  progress() {
+    return `
+      ${this.asked.length} of ${this.totalQuestions}
+    `;
+  }
+
+  isCompleted() {
+    return this.totalQuestions === this.asked.length;
   }
 
 }

@@ -20,7 +20,7 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
         </p>
       </div>
       <div>
-        <button class="start">Start</button>
+        <button class="start button">Start</button>
       </div>
     `;
   }
@@ -39,7 +39,7 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
         <fieldset>
           ${this._buildAnswers(answers)}
         </fieldset>
-      <button class='submit-answer' type='submit'>Submit</button>
+      <button class='submit-answer button' type='submit'>Submit</button>
       </form>
     `;
     
@@ -75,7 +75,7 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
       <div>
         <h2>Quiz Complete!</h2>
           ${this.model.isHighScore() ? this._highScoreHtml() : this._notHighScoreHtml()}
-          <button class='play-again'>Play Again</button>
+          <button class='play-again button'>Play Again</button>
       </div>
     `;
   }
@@ -109,7 +109,7 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
       <div class='result'>
         ${question.isCorrect() ? this._buildCorrectAnswerHtml(question) : this._buildIncorrectAnswerHtml(question)}
       </div>
-      <button class='continue'>Continue</button>
+      <button class='continue button'>Continue</button>
     `;
   }
 

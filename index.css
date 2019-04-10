@@ -1,3 +1,105 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 10px;
+  font-family: 'Roboto Slab', serif;
 }
+
+body {
+  background: #4e54c8;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #8f94fb, #4e54c8);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #8f94fb, #4e54c8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container {
+  max-width: 800px;
+  margin-top: 30px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 10px;
+}
+
+header{
+  border:  1px solid black;
+  display: flex;
+  background: #b2bec3;
+}
+
+header div {
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+}
+
+header div span {
+  font-weight: 400;
+}
+
+main {
+  display: flex;
+  border: 1px solid black;
+  justify-content: center;
+  text-align: center;
+  background: #fff;
+}
+
+.button {
+  background-color: #0984e3;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit-answer.button {
+  margin-top: 30px;
+}
+
+fieldset {
+  border: none;
+}
+
+fieldset label {
+  display: block;
+}
+
+fieldset label input {
+  margin-right:5px;
+}
+
+h3.incorrect-answer {
+  color: #d63031;
+}
+
+h3.correct-answer {
+  color: #00b894;
+}
+
+.result p:nth-child(2) {
+  margin-top: -17px;
+}
+
+.result p:nth-child(3) {
+  margin-top: 15px;
+}
+
+.result h3 {
+  margin-top: -15px;
+}
+
+.play-again {
+  margin-top: 30px;
+}
+
+@media only screen and (max-width: 640px) {
+  header span {
+    display: block;
+    margin-top: -8px;
+  }
+}
+
+/* did i do this right -mike */

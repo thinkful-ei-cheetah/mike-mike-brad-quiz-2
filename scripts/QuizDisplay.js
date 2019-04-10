@@ -25,7 +25,6 @@ class QuizDisplay extends Renderer {    // eslint-disable-line no-unused-vars
     `;
   }
 
-
   _buildAnswers(answers) {
     let template = '';
     answers.forEach(answer => {

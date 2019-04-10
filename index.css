@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+header {
+  border:  1px solid black;
+  display: flex;
+  justify-content: space-around;
+}
+
+header div {
+
+}
+
+main {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+}

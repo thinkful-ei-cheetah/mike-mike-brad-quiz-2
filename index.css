@@ -23,6 +23,8 @@ header{
   border:  1px solid black;
   display: flex;
   background: #b2bec3;
+
+  box-shadow: 4px 4px 5px 4px #2d3436;
 }
 
 header div {
@@ -41,6 +43,8 @@ main {
   justify-content: center;
   text-align: center;
   background: #fff;
+
+  box-shadow: 4px 4px 5px 4px #2d3436;
 }
 
 .button {
@@ -53,6 +57,18 @@ main {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
+  
+  text-transform: uppercase;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  outline: none;
+}
+
+.button:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
 }
 
 .submit-answer.button {
